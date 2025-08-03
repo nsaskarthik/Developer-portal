@@ -1,0 +1,72 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <span class="title">Developer Portal</span>
+  <span class="spacer"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="profileMenu" aria-label="User Profile">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>My Profile</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>settings</mat-icon>
+      <span>Settings</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<mat-sidenav-container class="app-container">
+  <mat-sidenav mode="side" opened class="side-nav">
+    <div class="sidebar-scroll">
+      <mat-nav-list>
+
+        <!-- DASHBOARD COLLAPSIBLE SECTION -->
+        <mat-list-item class="nav-parent" (click)="toggleSubMenu('dashboard')">
+          <mat-icon mat-list-icon>dashboard</mat-icon>
+          <span mat-line>Dashboard</span>
+          <span class="spacer"></span>
+          <mat-icon>
+            {{ openSubMenus['dashboard'] ? 'expand_less' : 'expand_more' }}
+          </mat-icon>
+        </mat-list-item>
+
+        <div *ngIf="openSubMenus['dashboard']" class="sub-links">
+          <a mat-list-item routerLink="/dashboard/errors" routerLinkActive="active-link">
+            <mat-icon mat-list-icon>error</mat-icon>
+            <span mat-line>Errors</span>
+          </a>
+          <a mat-list-item routerLink="/dashboard/logs" routerLinkActive="active-link">
+            <mat-icon mat-list-icon>history</mat-icon>
+            <span mat-line>Logs</span>
+          </a>
+          <a mat-list-item routerLink="/dashboard/charts" routerLinkActive="active-link">
+            <mat-icon mat-list-icon>bar_chart</mat-icon>
+            <span mat-line>Charts</span>
+          </a>
+        </div>
+
+        <!-- OTHER NAV ITEMS -->
+        <a mat-list-item routerLink="/interfaces" routerLinkActive="active-link">
+          <mat-icon mat-list-icon>integration_instructions</mat-icon>
+          <span mat-line>Interfaces</span>
+        </a>
+
+        <a mat-list-item routerLink="/cert-upload" routerLinkActive="active-link">
+          <mat-icon mat-list-icon>cloud_upload</mat-icon>
+          <span mat-line>Cert Upload</span>
+        </a>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

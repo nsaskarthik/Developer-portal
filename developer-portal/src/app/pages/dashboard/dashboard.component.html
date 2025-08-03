@@ -1,0 +1,15 @@
+<h2>Log Dashboard</h2>
+
+<div class="card-grid" *ngIf="!loading; else loadingTpl">
+ <mat-card *ngFor="let item of data">
+  <mat-card-title>{{ item.title }}</mat-card-title>
+  <mat-card-content>{{ item.body }}</mat-card-content>
+</mat-card>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading logs...</p>
+  </div>
+</ng-template>
